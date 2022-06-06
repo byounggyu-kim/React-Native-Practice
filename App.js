@@ -12,17 +12,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { MotiView } from "moti";
-import { Easing, set } from "react-native-reanimated";
+import { Easing } from "react-native-reanimated";
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [openExit, setOpenExit] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [lengthOfInput, setLengthOfInput] = useState(0);
+  const [openExit, setOpenExit] = useState(false); //import해야하는 코드
+  const [inputValue, setInputValue] = useState(""); //import해야하는 코드
+  const [lengthOfInput, setLengthOfInput] = useState(0); //import해야하는 코드
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
+      {/* import해야하는 코드 */}
       <Text>잠시만 기다려주세요</Text>
       <Text>로딩중입니다.</Text>
       {[...Array(3).keys()].map((index) => (
@@ -47,28 +48,9 @@ export default function App() {
           style={styles.dot}
         />
       ))}
-      <Modal
-        animationType="slide"
-        visible={isOpen}
-        transparent={true}
-        onRequestClose={() => setIsOpen(!isOpen)}
-        style={styles.modal}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalSize}>
-            <Text>모달 열림</Text>
-            <Image
-              source={require("./assets/favicon.png")}
-              style={styles.image}
-            />
-            <Button
-              title="눌러서 모달을 꺼주세요"
-              onPress={() => setIsOpen(!isOpen)}
-            />
-          </View>
-        </View>
-      </Modal>
-      <Button title="모달을 여는 버튼이다" onPress={() => setIsOpen(!isOpen)} />
+      {/* 로딩창 코드 */}
+
+      {/* 탈퇴버튼 코드 */}
       <Modal
         animationType="slide"
         visible={openExit}
@@ -115,7 +97,31 @@ export default function App() {
           </View>
         </View>
       </Modal>
+      {/* import하는 범위 */}
       <Button title="탈퇴하기" onPress={() => setOpenExit(!openExit)} />
+
+      <Modal
+        animationType="slide"
+        visible={isOpen}
+        transparent={true}
+        onRequestClose={() => setIsOpen(!isOpen)}
+        style={styles.modal}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalSize}>
+            <Text>모달 열림</Text>
+            <Image
+              source={require("./assets/favicon.png")}
+              style={styles.image}
+            />
+            <Button
+              title="눌러서 모달을 꺼주세요"
+              onPress={() => setIsOpen(!isOpen)}
+            />
+          </View>
+        </View>
+      </Modal>
+      <Button title="모달을 여는 버튼이다" onPress={() => setIsOpen(!isOpen)} />
     </SafeAreaView>
   );
 }
